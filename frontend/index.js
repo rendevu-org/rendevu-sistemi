@@ -6,14 +6,15 @@ const telefonInput = document.getElementById("validationCustom04");
 const btn = document.getElementById("submit");
 
 btn.addEventListener("click", (e) => {
-    e.preventDefault()
+  e.preventDefault();
   const data = {
     name: nameInput.value,
+    lastName: lastNameInput.value,
+    phone: telefonInput.value,
     email: emailInput.value,
-    lastName : lastNameInput.value,
-    phone : telefonInput.value, 
     password: passwordInput.value,
   };
+
   fetch("http://localhost:3000/api/auth/register", {
     method: "POST",
     headers: {
@@ -24,5 +25,9 @@ btn.addEventListener("click", (e) => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+      alert("User Created");
+    })
+    .catch((err) => {
+      console.log(err);
     });
 });
