@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centered Form</title>
+<!-- Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    /* Custom CSS for vertical centering */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Set container height to viewport height */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form class="needs-validation p-4 border shadow" novalidate>
+        <div class="row g-1">
+          <div class="col-md-12">
+            <h5 class="text-center">Siber Gençlik Merkezi</h5>
+          </div>
+          <div class="col-md-12">
+            <label for="validationCustom01" class="form-label">Ad</label>
+            <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+            <div class="valid-feedback">
+                Mükemmel!
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustom02" class="form-label">Soyad</label>
+            <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+            <div class="valid-feedback">
+                Mükemmel!
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustomUsername" class="form-label">E-posta</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text" id="inputGroupPrepend">@</span>
+              <input type="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" placeholder="E-posta" required>
+              <div class="invalid-feedback">
+                Lütfen bir eposta girin.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustom03" class="form-label">Şifre</label>
+            <input type="password" class="form-control" id="validationCustom03" placeholder="Şifre" required>
+            <div class="invalid-feedback">
+                Lütfen Şifreniz girin
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustom03" class="form-label">Cep</label>
+            <input type="text" class="form-control" id="validationCustom04" required>
+            <div class="invalid-feedback">
+                Lütfen telefon numaranızı girin
+            </div>
+          </div>  
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+              <label class="form-check-label" for="invalidCheck">
+                Şartlar ve koşulları kabul ediyorum
+              </label>
+              <div class="invalid-feedback">
+                Göndermeden önce kabul etmelisiniz.
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary" id="submit" type="submit">Üye ol</button>
+            <h7><a href="Giris.html" style="font-size: 12px;">Giriş Sayfa</a></h7>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="index.js">
+
+
+</script>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
