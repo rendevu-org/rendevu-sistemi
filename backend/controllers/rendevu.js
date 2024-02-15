@@ -26,12 +26,30 @@ const getAllRendevu = async (req, res) => {
 const deleteRendevu = async (req, res) => {
   try {
     const { id: rendevuId } = req.params;
-    const deletedRendevu = await rendevu.findByIdAndDelete(rendevuId);
+    const deletedRendevu = await rendevu.findById(rendevuId);
     if (!deletedRendevu) {
       return res
         .status(StatusCodes.NOT_FOUND)
         .json({ msg: `No rendevu with id : ${rendevuId}` });
     }
+
+    let currentTime = new Date().getHours();
+    let rendevuTime = deletedRendevu.time.split(":")[0];
+
+    let currentDate = new Date().toLocaleDateString();
+    let rendevuDate = new Date(deletedRendevu.date).toLocaleDateString();
+
+    if (
+      deletedRendevu.status === "accepted" &&
+      rendevuTime <= currentTime &&
+      rendevuDate === currentDate
+    ) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: "You can not delete an accepted rendevu" });
+    }
+
+    await deletedRendevu.remove();
     res.status(StatusCodes.OK).json({ deletedRendevu });
   } catch (error) {
     res
