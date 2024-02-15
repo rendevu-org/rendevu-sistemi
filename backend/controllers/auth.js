@@ -4,7 +4,12 @@ const { StatusCodes } = require("http-status-codes");
 const register = async (req, res) => {
   try {
     const person = await Person.create(req.body);
-    res.status(StatusCodes.CREATED).json({ person });
+    res.status(StatusCodes.CREATED).json({
+      id: person._id,
+      name: person.name + " " + person.lastName,
+      email: person.email,
+      phone: person.phone,
+    });
   } catch (error) {
     res
       .status(StatusCodes.BAD_REQUEST)

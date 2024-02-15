@@ -26,8 +26,10 @@ app.use((req, res, next) => {
 
 // routes
 const authRouter = require("./routes/auth");
+const rendevuRouter = require("./routes/rendevu");
 
 app.use("/api/auth", authRouter);
+app.use("/api/rendevu", rendevuRouter);
 
 // Error handler
 app.use(notFoundMiddleware);
