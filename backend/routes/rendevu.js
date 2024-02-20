@@ -8,4 +8,4 @@ const {
 } = require("../controllers/rendevu");
 
 router.route("/").post(createRendevu).get(getAllRendevu);
-router.route("/:id").delete(deleteRendevu);
+router.route("/delete/:id").delete(deleteRendevu);

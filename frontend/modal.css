@@ -11,6 +11,7 @@
   border-radius: 48px;
   padding: 50px 35px;
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
+  display: none;
 }
 
 .modal h2 {
