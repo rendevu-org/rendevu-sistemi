@@ -15,6 +15,8 @@ btn.addEventListener("click", (e) => {
     password: passwordInput.value,
   };
 
+  console.log(data);
+
   fetch("http://localhost:3000/api/auth/register", {
     method: "POST",
     headers: {
@@ -24,9 +26,8 @@ btn.addEventListener("click", (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-      alert("User Created");
-      // localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("user", JSON.stringify(data));
+      window.location.href = "index.html";
     })
     .catch((err) => {
       console.log(err);

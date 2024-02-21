@@ -3,79 +3,184 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Centered Form</title>
+    <title>Giriş</title>
     <!-- Bootstrap CSS -->
     <link
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Font -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <style>
-      /* Custom CSS for vertical centering */
+      body {
+        background-image: url(images/777.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
       .container {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh; /* Set container height to viewport height */
+        height: 100vh;
+      }
+
+      .password-toggle-btn {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .password-toggle-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .custom-form {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .custom-form:hover {
+        transform: translateY(-5px);
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+
+      .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+      }
+
+      .password-input {
+        transition: border-color 0.3s ease;
+      }
+
+      .password-input.focus {
+        border-color: #007bff !important;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fadeInUp {
+        animation: fadeInUp 0.5s ease forwards;
+      }
+
+      .logo {
+        width: 50px;
+        height: auto;
+        margin-right: 10px;
       }
     </style>
   </head>
+
   <body>
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <form class="needs-validation p-4 border shadow" novalidate>
-            <div class="row g-1">
-              <div class="col-md-12">
-                <h5 class="text-center">Siber Gençlik Merkezi</h5>
-              </div>
-              <div class="col-md-12">
-                <label for="validationCustom01" class="form-label"
-                  >E-posta</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  id="validationCustom01"
-                  placeholder="E-posta"
-                  required
-                />
-                <div class="valid-feedback">Mükemmel!</div>
-              </div>
-              <div class="col-md-12">
-                <label for="validationCustom02" class="form-label">Şifre</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="validationCustom02"
-                  placeholder="Şifre"
-                  required
-                />
-                <div class="valid-feedback">Mükemmel!</div>
-              </div>
-
-              <div class="form-check">
-                <!--    <label class="form-check-label" for="invalidCheck">
-                Üye Ol
-              </label> -->
-                <h6>
-                  <a href="oye_ol.html" style="font-size: 12px">Üye Ol</a>
-                </h6>
-              </div>
-            </div>
-            <div class="col-12">
-              <button class="btn btn-primary" type="submit" id="submit">
-                Üye ol
+      <div class="col-md-6">
+        <form class="needs-validation p-4 custom-form fadeInUp" novalidate>
+          <h5 class="text-center mb-4">
+            <img src="images/ss.png" alt="." class="logo" />
+            Siber Gençlik Merkezi
+          </h5>
+          <div class="form-group">
+            <label for="validationCustom01">E-posta</label>
+            <input
+              type="email"
+              class="form-control"
+              id="validationCustom01"
+              placeholder="E-posta"
+              required
+            />
+            <div class="valid-feedback">Mükemmel!</div>
+          </div>
+          <div class="form-group position-relative">
+            <label for="validationCustom02">Şifre</label>
+            <div class="input-group">
+              <input
+                type="password"
+                class="form-control password-input"
+                id="validationCustom02"
+                placeholder="Şifre"
+                required
+              />
+              <button
+                class="btn btn-outline-secondary password-toggle-btn"
+                type="button"
+                id="togglePassword"
+              >
+                <i class="fas fa-eye"></i>
               </button>
             </div>
-          </form>
-        </div>
+            <div class="valid-feedback">Mükemmel!</div>
+          </div>
+          <div class="form-group d-flex justify-content-between">
+            <small><a href="sifreUnuttum.html">Şifreni mi unuttun?</a></small>
+            <small><a href="oye_ol.html">Üye Ol</a></small>
+          </div>
+          <button
+            class="btn btn-primary btn-block mt-3"
+            type="submit"
+            id="submit"
+          >
+            Giriş
+          </button>
+        </form>
       </div>
     </div>
 
     <script src="login.js"></script>
-    <!-- Bootstrap JS and dependencies -->
+    <!-- Font -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#togglePassword").click(function () {
+          var passwordField = $("#validationCustom02");
+          var passwordFieldType = passwordField.attr("type");
+          if (passwordFieldType === "password") {
+            passwordField.attr("type", "text");
+            $(this).html('<i class="fas fa-eye-slash"></i>');
+          } else {
+            passwordField.attr("type", "password");
+            $(this).html('<i class="fas fa-eye"></i>');
+          }
+        });
+      });
+    </script>
   </body>
 </html>

@@ -15,7 +15,6 @@ const times = [
 
 document.addEventListener("DOMContentLoaded", async () => {
   const allRendevuData = await getAllRendevus();
-  console.log(allRendevuData);
 
   for (let i = 0; i < allRendevuData.length; i++) {
     for (let j = 0; j < times.length; j++) {
@@ -99,21 +98,26 @@ document.addEventListener("DOMContentLoaded", async () => {
   const submitBtns = document.querySelectorAll(".button-23");
 
   submitBtns.forEach((button, idx) => {
-    const dbTime = allRendevuData[idx]?.time || "";
     button.addEventListener("click", (e) => {
       e.preventDefault();
       const userData = JSON.parse(localStorage.getItem("user"));
+      const rendevuDataSingle = allRendevuData?.find(
+        (item) =>
+          item.person === userData.id && item.time === e.target.dataset.time
+      );
+
+      const dbTime = rendevuDataSingle?.time || "";
+      const personID = rendevuDataSingle?.person || "";
 
       if (!userData) {
         alert("Lütfen giriş yapınız");
       } else {
         const { name, phone, id } = userData;
-        const personID = allRendevuData[idx]?.person || "";
 
         saat = e.target.dataset.time;
         let availability = e.target.dataset.availability;
         let date = new Date().toLocaleDateString();
-        let rendevuID = dbTime == saat ? allRendevuData[idx]?._id : "";
+        let rendevuID = dbTime == saat ? rendevuDataSingle._id : "";
 
         let modal = "";
         modal += `
@@ -206,6 +210,7 @@ function logout() {
 }
 
 function deleteRendevu(id, personID, userID) {
+  console.log(personID, userID);
   if (personID !== userID) {
     alert("Bu randevuyu silemezsiniz");
     return;

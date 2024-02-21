@@ -82,9 +82,7 @@ p {
 .bilgiler-list li a:hover {
   color: coral;
 }
-.appointment-container {
-  /* margin-left: 108px; */
-}
+
 .app-list {
   display: flex;
   justify-content: center;
