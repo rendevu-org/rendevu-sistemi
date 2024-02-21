@@ -33,7 +33,7 @@ const login = async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: "wrong password" });
     } else {
-      res.status(StatusCodes.OK).json({ person });
+      res.status(StatusCodes.OK).json(person);
     }
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST).json({ msg: "login error : " + error });

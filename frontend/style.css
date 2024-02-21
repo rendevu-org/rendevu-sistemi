@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+}
+
 .contain {
   display: flex;
   justify-content: center;
@@ -16,7 +20,6 @@ body {
   width: 100%;
   margin-left: 36px;
   padding-top: 25px;
-  position: fixed;
   top: 0;
   display: flex;
   justify-content: center;
@@ -43,6 +46,8 @@ p {
   margin: 10px;
   font-family: Comic Sans MS, Comic Sans, cursive;
   color: white;
+  padding: 6px 10px;
+  border-radius: 10px;
 }
 .nav_item a {
   transition: background-color 0.3s ease;
@@ -54,6 +59,9 @@ p {
 }
 .bilgiler {
   padding-left: 100px;
+  height: 160px;
+  display: flex;
+  align-items: center;
 }
 .bilgiler-list {
   background-color: aliceblue;
@@ -64,7 +72,6 @@ p {
   justify-content: center;
   align-items: center;
   gap: 100px;
-  margin-top: 10em;
   margin-left: 15rem;
 }
 .bilgiler-list li a,
@@ -81,7 +88,10 @@ p {
 .app-list {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 100px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 .details-container {
   margin-left: 55px;
@@ -91,11 +101,16 @@ p {
 }
 .nav_item3 {
   background-color: green;
+  width: 113px;
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .randevular {
   margin-right: 66px;
 }
-.details-container2 {
+.details-container:nth-child(odd) {
   background-color: blueviolet;
 }
 .button-23 {
@@ -153,9 +168,19 @@ footer {
 }
 .map {
   text-decoration: none;
-  list-style: none;
-  transition:color 0.3s ease;;
 }
-.map :hover {
+p {
+  text-decoration: none;
+  transition: color 0.7s ease;
+}
+p:hover {
   color: aqua;
+}
+.logo {
+  margin-left: 63px;
+  width: 80px;
+}
+
+.logoutBtn {
+  display: none;
 }

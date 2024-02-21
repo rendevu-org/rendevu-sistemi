@@ -4,7 +4,7 @@ const { StatusCodes } = require("http-status-codes");
 const createRendevu = async (req, res) => {
   try {
     const newRendevu = await rendevu.create(req.body);
-    res.status(StatusCodes.CREATED).json({ newRendevu });
+    res.status(StatusCodes.CREATED).json(newRendevu);
   } catch (error) {
     res
       .status(StatusCodes.BAD_REQUEST)
@@ -14,8 +14,8 @@ const createRendevu = async (req, res) => {
 
 const getAllRendevu = async (req, res) => {
   try {
-    const allRendevu = await rendevu.find().populate("person");
-    res.status(StatusCodes.OK).json({ allRendevu });
+    const allRendevu = await rendevu.find();
+    res.status(StatusCodes.OK).json(allRendevu);
   } catch (error) {
     res
       .status(StatusCodes.BAD_REQUEST)
@@ -33,24 +33,24 @@ const deleteRendevu = async (req, res) => {
         .json({ msg: `No rendevu with id : ${rendevuId}` });
     }
 
-    let currentTime = new Date().getHours();
-    let rendevuTime = deletedRendevu.time.split(":")[0];
+    // let currentTime = new Date().getHours();
+    // let rendevuTime = deletedRendevu.time.split(":")[0];
 
-    let currentDate = new Date().toLocaleDateString();
-    let rendevuDate = new Date(deletedRendevu.date).toLocaleDateString();
+    // let currentDate = new Date().toLocaleDateString();
+    // let rendevuDate = new Date(deletedRendevu.date).toLocaleDateString();
 
-    if (
-      deletedRendevu.status === "accepted" &&
-      rendevuTime <= currentTime &&
-      rendevuDate === currentDate
-    ) {
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ msg: "You can not delete an accepted rendevu" });
-    }
+    // if (
+    //   deletedRendevu.status === "accepted" &&
+    //   rendevuTime <= currentTime &&
+    //   rendevuDate === currentDate
+    // ) {
+    //   return res
+    //     .status(StatusCodes.BAD_REQUEST)
+    //     .json({ msg: "You can not delete an accepted rendevu" });
+    // }
 
-    await deletedRendevu.remove();
-    res.status(StatusCodes.OK).json({ deletedRendevu });
+    await deletedRendevu.deleteOne();
+    res.status(StatusCodes.OK).json(deletedRendevu);
   } catch (error) {
     res
       .status(StatusCodes.BAD_REQUEST)

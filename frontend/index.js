@@ -26,6 +26,7 @@ btn.addEventListener("click", (e) => {
     .then((data) => {
       console.log(data);
       alert("User Created");
+      // localStorage.setItem("user", JSON.stringify(data));
     })
     .catch((err) => {
       console.log(err);

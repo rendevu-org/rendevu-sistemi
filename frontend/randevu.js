@@ -1,55 +1,229 @@
-var availability = document.querySelectorAll(".nav_item3");
-const submitBtns = document.querySelectorAll(".button-23");
+async function getAllRendevus() {
+  const response = await fetch("http://localhost:3000/api/rendevu/");
+  const data = await response.json();
+  return data;
+}
 
-availability.forEach(function (element) {
-  element.addEventListener("click", function () {
-    element.textContent = "not available";
-    element.style.backgroundColor = "red";
+const times = [
+  ["8h-10h", false],
+  ["10h-12h", false],
+  ["12h-14h", false],
+  ["14h-16h", false],
+  ["16h-18h", false],
+  ["18h-20h", false],
+];
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const allRendevuData = await getAllRendevus();
+  console.log(allRendevuData);
+
+  for (let i = 0; i < allRendevuData.length; i++) {
+    for (let j = 0; j < times.length; j++) {
+      if (
+        allRendevuData[i].time === times[j][0] &&
+        allRendevuData[i].status === "active"
+      ) {
+        times[j][1] = true;
+      }
+    }
+  }
+
+  // get local storage and check if user is logged in
+  const userData = JSON.parse(localStorage.getItem("user"));
+
+  const oyeOlBtn = document.querySelector(".registerBtn");
+  const girisYapBtn = document.querySelector(".loginBtn");
+  const cikisYapBtn = document.querySelector(".logoutBtn");
+
+  if (userData) {
+    oyeOlBtn.style.display = "none";
+    girisYapBtn.style.display = "none";
+    cikisYapBtn.style.display = "block";
+
+    let navlistHtml = "";
+    navlistHtml += `
+        <li class="registerBtn">
+        <i class="fa-solid fa-user-plus" style="color: #ffffff"></i
+        ><a href="#" class="nav_item">${userData.name}</a>
+      </li>
+        `;
+    document
+      .querySelector(".nav-list")
+      .insertAdjacentHTML("afterbegin", navlistHtml);
+  } else {
+    oyeOlBtn.style.display = "block";
+    girisYapBtn.style.display = "block";
+    cikisYapBtn.style.display = "none";
+  }
+
+  const randevularDiv = document.querySelector(".randevular");
+  let isAvailable = true;
+  let saat = "";
+
+  times.forEach((time, index) => {
+    if (time[1]) {
+      isAvailable = false;
+    } else {
+      isAvailable = true;
+    }
+
+    let html = "";
+    html += `
+        <div class="details-container">
+            <ul class="app-list">
+                <li><span class="nav_item">${time[0]}</span></li>
+                <li>
+                    <span class="nav_item nav_item2 nav_item3" style='${
+                      time[1] ? "background-color: red;" : ""
+                    }'>
+                        ${isAvailable ? "mevcut" : "mevcut değil"}
+                    </span>
+                </li>
+                <li><span class="nav_item nav_item2">Abdelkader</span></li>
+                <li><span class="nav_item nav_item2">${index + 1}</span></li>
+                <li>
+                    <a href="#">
+                        <button class="button-23" role="button" data-time=${
+                          time[0]
+                        } data-availability=${isAvailable ? "true" : "false"}>
+        Rezervasyon Yap
+    </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        `;
+    randevularDiv.insertAdjacentHTML("beforeend", html);
   });
-});
 
-submitBtns.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    e.preventDefault();
-    let parentDiv = button.parentNode.parentNode.parentNode;
-    let date = parentDiv.children[0].childNodes[0].textContent;
+  const submitBtns = document.querySelectorAll(".button-23");
 
-    let modal = "";
-    modal += `   
-    <div class="modal">
-        <div class="modal-content">
-        <div class="modal-header">
-            <span class="close-button">&times;</span>
-            <h2>Rendevu Detaylar</h2>
-        </div>
-        <div class="modal-body">
-            <div class="rendevu-detail">
-            <div class="rendevu-detail-label">Rendevu Alan kişi</div>
-            <h2 class="rendevu-detail-value">RED EL MA</h2>
-            </div>
-            <div class="rendevu-detail">
-            <div class="rendevu-detail-label">Rendevu Saati</div>
-            <h2 class="rendevu-detail-value">${date}</h2>
-            </div>
-            <div class="rendevu-detail">
-            <div class="rendevu-detail-label">Rendevu Durumu</div>
-            <h2 class="rendevu-detail-value">Empty</h2>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="modal-close-button" onclick="closeModal()">Kapat</button>
-            <button class="modal-confirm-button">Onayla</button>
-        </div>
-        </div>
-    </div>
-    `;
+  submitBtns.forEach((button, idx) => {
+    const dbTime = allRendevuData[idx]?.time || "";
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      const userData = JSON.parse(localStorage.getItem("user"));
 
-    document.querySelector("body").insertAdjacentHTML("beforeend", modal);
-    document.querySelector(".modal").style.display = "block";
+      if (!userData) {
+        alert("Lütfen giriş yapınız");
+      } else {
+        const { name, phone, id } = userData;
+        const personID = allRendevuData[idx]?.person || "";
+
+        saat = e.target.dataset.time;
+        let availability = e.target.dataset.availability;
+        let date = new Date().toLocaleDateString();
+        let rendevuID = dbTime == saat ? allRendevuData[idx]?._id : "";
+
+        let modal = "";
+        modal += `
+                <div class="modal">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close-button" onclick='closeModal()'>&times;</span>
+                        <h2>Rendevu Detaylar</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="rendevu-detail">
+                            <div class="rendevu-detail-label">Rendevu Alan kişi</div>
+                            <h2 class="rendevu-detail-value">${name}</h2>
+                        </div>
+                        <div class="rendevu-detail">
+                            <div class="rendevu-detail-label">Rendevu Saati</div>
+                            <h2 class="rendevu-detail-value">${saat}</h2>
+                        </div>
+                        <div class="rendevu-detail">
+                            <div class="rendevu-detail-label">Rendevu Durumu</div>
+                            <h2 class="rendevu-detail-value">${
+                              availability == "true" ? "Mevcut" : "Mevcut Değil"
+                            }</h2>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-close-button" onclick='closeModal()'>Kapat</button>
+                        <button class="modal-confirm-button" onclick="${
+                          availability === "true"
+                            ? `createRendevu('${name}' , '${date}' , '${saat}' , '${phone}' , '${id}')`
+                            : `deleteRendevu('${rendevuID}', '${personID}', '${id}')`
+                        }">
+                            ${
+                              availability === "true"
+                                ? "Rendevu Oluştur"
+                                : "Rendevu Sil"
+                            }
+                        </button>
+                    </div>
+                    </div>
+                </div>
+                `;
+
+        document.querySelector("body").insertAdjacentHTML("beforeend", modal);
+        document.querySelector(".modal").style.display = "block";
+      }
+    });
   });
 });
 
 function closeModal() {
   document.querySelector(".modal").style.display = "none";
   document.querySelector(".modal").remove();
+}
+
+function createRendevu(name, date, time, phone, userID) {
+  const body = {
+    name,
+    date,
+    time,
+    phone,
+    status: "active",
+    person: userID,
+  };
+
+  fetch("http://localhost:3000/api/rendevu/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data) {
+        closeModal();
+        window.location.reload();
+      } else {
+        alert("");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function logout() {
+  localStorage.removeItem("user");
+  window.location.href = "index.html";
+}
+
+function deleteRendevu(id, personID, userID) {
+  if (personID !== userID) {
+    alert("Bu randevuyu silemezsiniz");
+    return;
+  }
+
+  fetch(`http://localhost:3000/api/rendevu/delete/${id}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data) {
+        closeModal();
+        window.location.reload();
+      } else {
+        alert("");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }

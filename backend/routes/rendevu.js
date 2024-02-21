@@ -9,3 +9,5 @@ const {
 
 router.route("/").post(createRendevu).get(getAllRendevu);
 router.route("/delete/:id").delete(deleteRendevu);
+
+module.exports = router;
