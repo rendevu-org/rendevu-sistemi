@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   for (let i = 0; i < allRendevuData.length; i++) {
     for (let j = 0; j < times.length; j++) {
       if (
-        allRendevuData[i].time === times[j][0] &&
-        allRendevuData[i].status === "active"
+        allRendevuData[i]?.time === times[j][0] &&
+        allRendevuData[i]?.status === "active"
       ) {
         times[j][1] = true;
       }
