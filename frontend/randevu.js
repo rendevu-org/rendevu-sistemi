@@ -78,15 +78,25 @@ document.addEventListener("DOMContentLoaded", async () => {
                         ${isAvailable ? "mevcut" : "mevcut değil"}
                     </span>
                 </li>
-                <li><span class="nav_item nav_item2">Abdelkader</span></li>
-                <li><span class="nav_item nav_item2">${index + 1}</span></li>
+                <li class="hide"><span class="nav_item nav_item2">Abdelkader</span></li>
+                <li class="hide"><span class="nav_item nav_item2">${
+                  index + 1
+                }</span></li>
                 <li>
                     <a href="#">
                         <button class="button-23" role="button" data-time=${
                           time[0]
-                        } data-availability=${isAvailable ? "true" : "false"}>
-        Rezervasyon Yap
-    </button>
+                        } data-availability=${isAvailable ? "true" : "false"} 
+                        style='${
+                          time[1] ? "background-color: red; color: white;" : ""
+                        }'
+                        >
+                            ${
+                              isAvailable
+                                ? "Rezervasyon Yap"
+                                : "Rezervasyon Sil"
+                            }
+                        </button>
                     </a>
                 </li>
             </ul>
