@@ -12,6 +12,29 @@
     <title>Rendevu</title>
   </head>
   <body>
+    <div class="information">
+      <div class="info-header">
+        <h1>benim profilim</h1>
+      </div>
+      <div class="randevuDetails">
+        <div class="detail">
+          <i class="fa-solid fa-user"></i>
+          <span style="font-size: 24px" class="value" id="name"
+            >${userData.name}</span
+          >
+        </div>
+      </div>
+      <div class="randevuDetails">
+        <div class="detail">
+          <i class="fa-solid fa-phone"></i>
+          <span style="font-size: 18px" class="value" id="userPhone"
+            >${userData.phone}</span
+          >
+        </div>
+
+        <h3></h3>
+      </div>
+    </div>
     <div class="container">
       <div class="nav-bar">
         <ul class="nav-list">
@@ -93,6 +116,8 @@
         >
       </div>
     </footer>
+
     <script src="randevu.js"></script>
+    <script src="profile.js"></script>
   </body>
 </html>

@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     navlistHtml += `
         <li class="registerBtn">
         <i class="fa-solid fa-user-plus" style="color: #ffffff"></i
-        ><a href="#" class="nav_item">${userData.name}</a>
+        ><a href="#" class="nav_item" id="userProfileName">${userData.name}</a>
       </li>
         `;
     document
@@ -104,6 +104,58 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
     randevularDiv.insertAdjacentHTML("beforeend", html);
   });
+
+  // const informationDiv = document.querySelector(".information");
+  // const userRendevus = await getRendevu(userData.id);
+  // let html2 = "";
+  // let isOpen = false;
+  // html2 += `
+  //         <div class="randevuDetails">
+  //          <div class="detail">
+  //           <i class="fa-solid fa-user" ></i>
+  //           <span style="font-size: 24px;" class="value" id="name">${userData.name}</span>        
+          
+  //         </div>
+  //         </div>
+  //         <div class="randevuDetails">
+  //           <div class="detail">
+  //             <i class="fa-solid fa-phone" ></i>
+  //             <span style="font-size: 18px;" class="value">${userData.phone}</span>
+  //           </div>
+           
+  //           <h3></h3>
+  //         </div>
+  //         <div class="randevuDetails">  
+  //          <div class="detail">
+  //           <i class="fa-solid fa-clock" ></i>
+  //           <span class="value">10j</span>
+  //          </div> 
+  //          <h3></h3>
+  //           <h3></h3>
+  //         </div>
+          
+  //         <div class="randevuDetails">
+  //           <div class="detail">
+  //             <img src="images/checked (1).png" style="width: 15px">
+  //             <span class="value">available</span>
+  //           </div>
+            
+  //           <h3 class="value"></h3>
+  //         </div>
+  // `;
+  // informationDiv.insertAdjacentHTML("afterbegin", html2);
+
+  // const userBtn = document.getElementById("userName");
+  // userBtn.addEventListener("click", () => {
+  //   if (isOpen) {
+  //     informationDiv.style.transition = "margin-left 0.5s ease";
+  //     informationDiv.style.marginLeft = "0";
+  //   } else {
+  //     informationDiv.style.transition = "margin-left 0.5s ease";
+  //     informationDiv.style.marginLeft = "100%";
+  //   }
+  //   isOpen = !isOpen;
+  // });
 
   const submitBtns = document.querySelectorAll(".button-23");
 

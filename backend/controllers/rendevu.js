@@ -23,6 +23,17 @@ const getAllRendevu = async (req, res) => {
   }
 };
 
+const getRendevu = async (req, res) => {
+  try {
+    const allRendevu = await rendevu.find({ person: req.params.id });
+    res.status(StatusCodes.OK).json(allRendevu);
+  } catch (error) {
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: "getAllRendevu error : " + error });
+  }
+};
+
 const deleteRendevu = async (req, res) => {
   try {
     const { id: rendevuId } = req.params;
@@ -61,5 +72,6 @@ const deleteRendevu = async (req, res) => {
 module.exports = {
   createRendevu,
   getAllRendevu,
+  getRendevu,
   deleteRendevu,
 };
