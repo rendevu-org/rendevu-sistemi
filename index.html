@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="modal.css" />
+    <title>Rendevu</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="information">
+      </div>
+      <div class="nav-bar">
+        <ul class="nav-list">
+          <li class="registerBtn">
+            <i class="fa-solid fa-user-plus" style="color: #ffffff"></i
+            ><a href="oye_ol.html" class="nav_item">Üye ol</a>
+          </li>
+          <li class="loginBtn">
+            <i class="fa-solid fa-right-to-bracket" style="color: #ffffff"></i>
+            <a href="Giris.html" class="nav_item">Giriş</a>
+          </li>
+          <li class="logoutBtn">
+            <i class="fa-solid fa-calendar-check" style="color: #ffffff"></i
+            ><a href="" class="nav_item" onclick="logout()">Çıkış Yap</a>
+          </li>
+        </ul>
+      </div>
+    
+      <div class="bilgiler">
+        <ul class="bilgiler-list">
+          <li>
+            <img src="images/checked (1).png" style="width: 15px" /><a
+              href=""
+              class="nav_item"
+              >mevcut</a
+            >
+          </li>
+          <li>
+            <img src="images/unavailable.png" style="width: 15px" /><a
+              href=""
+              class="nav_item"
+              >mevcut değil</a
+            >
+          </li>
+          <li>
+            <img src="images/guide.png" style="width: 15px" /><a
+              href="GuideLines.html"
+              class="nav_item"
+              >Yönergeler</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="appointment-container">
+        <ul class="app-list">
+          <li>
+            <i class="fa-solid fa-clock" style="color: #ffffff">
+              <span class="nav_item">Saat</span></i
+            >
+          </li>
+          <li><span class="nav_item">kullanılabilirlik</span></li>
+          <li>
+            <i class="fa-solid fa-building-user" style="color: #ffffff"
+              ><span class="nav_item">Personel</span></i
+            >
+          </li>
+          <li><span class="nav_item">Salon Numarası</span></li>
+          <li></li>
+        </ul>
+      </div>
+
+      <div class="randevular"></div>
+    </div>
+    <footer>
+      <div>
+        <img src="images/siberlogo.png" class="logo" />
+        <p>Siber Isparta Gençlik Merkezi</p>
+      </div>
+      <div class="iletişim">
+        <p>İletişim</p>
+        <a href="" class="map"><p>siberisparta@gmail.com</p></a>
+        <a href="" class="map"
+          ><p>
+            Isparta Fatih Mahallesi Paşaoğlu Caddesi Siber <br />
+            Isparta Gençlik Merkezi Isparta/Merkez
+          </p></a
+        >
+      </div>
+      <div></div>
+    </footer>
+    <script src="randevu.js"></script>
+  </body>
+</html>
