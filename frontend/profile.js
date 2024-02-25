@@ -1,9 +1,9 @@
+let isOpen = false;
 document.addEventListener("DOMContentLoaded", async () => {
   const userData = JSON.parse(localStorage.getItem("user"));
   const informationDiv = document.querySelector(".information");
   const name = document.getElementById("name");
   const phone = document.getElementById("userPhone");
-  let isOpen = false;
 
   if (!userData) {
     alert("Please login first");
@@ -11,12 +11,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   name.textContent = userData?.name;
   phone.textContent = userData?.phone;
 
-  //   const userRendevus = await getRendevu(userData.id);
-  //   informationDiv.insertAdjacentHTML("beforeend", userRendevus);
+  const userRendevus = await getRendevu(userData.id);
+  informationDiv.insertAdjacentHTML("beforeend", userRendevus);
 
   setTimeout(async () => {
     const userBtn = document.getElementById("userProfileName");
-    const userRendevus = await getRendevu(userData.id);
 
     userBtn.addEventListener("click", () => {
       console.log(userBtn + "clicked");
@@ -24,13 +23,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (isOpen) {
         informationDiv.style.transition = "all 0.5s ease";
         informationDiv.style.left = "0%";
+        document.addEventListener("click", (e) => {
+          handleClickOutside(e, informationDiv, userBtn);
+        });
       } else {
         informationDiv.style.transition = "all 0.5s ease";
         informationDiv.style.left = "-100%";
+        document.removeEventListener("click", handleClickOutside);
       }
     });
-
-    informationDiv.insertAdjacentHTML("beforeend", userRendevus);
   }, 500);
 });
 
@@ -58,6 +59,13 @@ async function getRendevu(userID) {
                   <span class="value" id="userAvailable">Mevcut</span>
                 </div>
               </div>
+
+              <div class="randevuDetails">
+                <div class="detail delete-button" onclick="deleteRendevu('${rendevu._id}', '${rendevu.person}', '${userID}')">
+                  <i class="fa-solid fa-trash"></i>
+                  <span class="value">Rendevu Sil</span>
+                </div>
+              </div>
             `;
     });
 
@@ -65,4 +73,40 @@ async function getRendevu(userID) {
   } catch (error) {
     console.log(error);
   }
+}
+
+function deleteRendevu(id, personID, userID) {
+  if (personID !== userID) {
+    alert("Bu randevuyu silemezsiniz");
+    return;
+  }
+
+  fetch(`http://localhost:3000/api/rendevu/delete/${id}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data) {
+        alert("Rendevu başarıyla silindi");
+        window.location.reload();
+      } else {
+        alert("");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function handleClickOutside(event, informationDiv, userBtn) {
+  console.log("clicked outside");
+  if (
+    !informationDiv.contains(event.target) &&
+    !userBtn.contains(event.target)
+  ) {
+    isOpen = false;
+    informationDiv.style.transition = "all 0.5s ease";
+    informationDiv.style.left = "-100%";
+  }
+  document.removeEventListener("click", handleClickOutside);
 }

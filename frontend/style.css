@@ -183,6 +183,60 @@ p:hover {
   margin: 0 3rem;
 }
 
+/* profile information */
+.information {
+  padding-top: 15px;
+  position: absolute;
+  width: 30vw;
+  height: 100%;
+  left: -100%;
+  box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
+  background-color: #f7f7f7;
+  color: #000000;
+  border-radius: 5px;
+}
+.value {
+  margin-left: 5px;
+}
+.randevuDetails {
+  padding-bottom: 20px;
+  margin-left: 20px;
+  width: 70%;
+}
+
+.randevuDetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.divider {
+  width: 100%;
+  height: 5px;
+  background-color: #2222228a;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.info-header {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.randevuDetails .delete-button {
+  color: red;
+  padding: 10px 15px;
+  border: 1px solid red;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.randevuDetails .delete-button:hover {
+  background-color: red;
+  color: white;
+}
+
 @media (max-width: 670px) {
   .appointment-container .nav_item,
   .randevular .nav_item {
@@ -258,45 +312,17 @@ p:hover {
   .info-header {
     font-size: 1rem;
   }
-}
 
-/* profile information */
-.information {
-  padding-top: 15px;
-  position: absolute;
-  width: 30vw;
-  height: 100%;
-  left: -100%;
-  box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
-  background-color: #f7f7f7;
-  color: #000000;
-  border-radius: 5px;
-}
-.value {
-  margin-left: 5px;
-}
-.randevuDetails {
-  padding-bottom: 20px;
-  margin-left: 20px;
-  width: 70%;
-}
+  .information {
+    width: 70vw !important;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.randevuDetails {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.divider {
-  width: 100%;
-  height: 5px;
-  background-color: #2222228a;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.info-header {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  .randevuDetails {
+    margin-left: 0;
+    justify-content: center;
+  }
 }
